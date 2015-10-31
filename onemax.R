@@ -1,3 +1,4 @@
+# blend parent rows
 blend <- function(x) {
   blnd <- numeric(ncol(x))
   for (i in 1:ncol(x)) {
@@ -6,15 +7,15 @@ blend <- function(x) {
   return(blnd)
 }
 
-mutate <- function(x) {
-  mt <- x
-  mt_gene <- sample(1:length(x),size=1)
-  if (mt[mt_gene] == 1) {
-    mt[mt_gene] <- 0 
+# mutate a row
+mutate <- function(row) {
+  mt_gene <- sample(1:length(row),size=1)
+  if (row[mt_gene] == 1) {
+    row[mt_gene] <- 0 
   } else {
-    mt[mt_gene] <- 1
+    row[mt_gene] <- 1
   }
-  return(mt)
+  return(row)
 }
 
 mat <- matrix(nrow=10,ncol=100)
