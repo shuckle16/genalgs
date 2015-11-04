@@ -1,6 +1,9 @@
 #### Logistic regresssion / lasso
 
 
+library(glmnet)
+library(SDMTools)
+
 LR <-glmnet(y = ytrain_sm,x=data.matrix(xtrain_sm),family="binomial")
 
 
@@ -27,6 +30,8 @@ confusion.matrix(obs=ytest,pred = predLRlas)
 
 #### Adaboost
 
+library(ada)
+
 
 ABmodel <- ada(x=xtrain_sm,y=ytrain_sm,test.x=xtrain_val,test.y=ytrain_val,iter=100)
 predAB <- as.numeric(predict(ABmodel,xtest,type="probs")[,2])
@@ -39,6 +44,9 @@ cm_ada <-confusion.matrix(obs=ytest,pred=predAB)
 
 
 #### Random Forest (slow)
+
+
+library(randomForest)
 
 rFmodel <- randomForest(x=xtrain,y=ytrain,  ntree=500, importance=TRUE)
 
@@ -57,7 +65,6 @@ plot(roc(predrF,ytest))
 
 
 ####### Kernel factory (very slow)
-
 
 
 #KF: Kernel Factory 
